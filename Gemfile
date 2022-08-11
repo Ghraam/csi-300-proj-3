@@ -72,3 +72,4 @@ group :test do
 end
 
 gem "schema_to_scaffold"
+gem "rufo"
