@@ -70,3 +70,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "schema_to_scaffold"
