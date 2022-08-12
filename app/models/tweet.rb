@@ -3,4 +3,14 @@ class Tweet < ApplicationRecord
   has_many :retweets, through: :retweets, foreign_key: "retweeted"
   has_many :retweeted_tweets, through: :retweets, foreign_key: "quote_tweet"
   has_many :likes, through: :likes
+  trigger.after(:insert) {
+    <<-SQL
+    UPDATE users SET num_tweets = num_tweets + 1 WHERE handle = NEW.handle;
+    SQL
+  }
+  trigger.after(:delete) {
+    <<-SQL
+    UPDATE users SET num_tweets = num_tweets - 1 WHERE handle = OLD.handle;
+    SQL
+  }
 end
