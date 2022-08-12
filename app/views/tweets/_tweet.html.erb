@@ -1,7 +1,7 @@
 <div id="<%= dom_id tweet %>">
   <p>
     <strong>Handle:</strong>
-    <%= tweet.handle %>
+    @<%= tweet.handle %>
   </p>
 
   <p>
@@ -19,4 +19,8 @@
     <%= tweet.num_retweets %>
   </p>
 
+  <p>
+    <strong>Created at:</strong>
+    <%= tweet.created_at %>
+  </p>
 </div>

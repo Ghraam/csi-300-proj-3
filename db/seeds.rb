@@ -7,5 +7,8 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 6.times do
-  User.create(handle: Faker::Internet.username[0...15], screen_name: Faker::Name.name, email: Faker::Internet.email, bio: Faker::Lorem.paragraph)
+  user = User.create(handle: Faker::Internet.username[0...15], screen_name: Faker::Name.name, email: Faker::Internet.email, bio: Faker::Lorem.paragraph)
+  6.times do
+    Tweet.create(handle: user.handle, content: Faker::Lorem.paragraph)
+  end
 end
