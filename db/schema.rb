@@ -58,4 +58,78 @@ ActiveRecord::Schema[7.0].define(version: 0) do
   add_foreign_key "retweets", "tweets", column: "quote_tweet", primary_key: "tweet_id", name: "fk_retweets_tweets1", on_delete: :cascade
   add_foreign_key "retweets", "tweets", column: "retweeted", primary_key: "tweet_id", name: "fk_users_has_tweets_tweets1", on_delete: :cascade
   add_foreign_key "tweets", "users", column: "handle", primary_key: "handle", name: "fk_tweets_users1", on_delete: :cascade
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER follows_AFTER_DELETE AFTER DELETE ON `follows`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`users` SET num_followers = num_followers - 1 WHERE handle = OLD.followee;
+UPDATE `csi_300_project_3_development`.`users` SET num_following = num_following - 1 WHERE handle = OLD.follower;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER follows_AFTER_INSERT AFTER INSERT ON `follows`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`users` SET num_followers = num_followers + 1 WHERE handle = NEW.followee;
+UPDATE `csi_300_project_3_development`.`users` SET num_following = num_following + 1 WHERE handle = NEW.follower;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER likes_AFTER_DELETE AFTER DELETE ON `likes`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`tweets` SET num_likes = num_likes - 1 WHERE tweet_id = OLD.tweet_id;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER likes_AFTER_INSERT AFTER INSERT ON `likes`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`tweets` SET num_likes = num_likes + 1 WHERE tweet_id = NEW.tweet_id;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER retweets_AFTER_DELETE AFTER DELETE ON `retweets`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`tweets` SET num_retweets = num_retweets - 1 WHERE tweet_id = OLD.retweeted;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER retweets_AFTER_INSERT AFTER INSERT ON `retweets`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`tweets` SET num_retweets = num_retweets + 1 WHERE tweet_id = NEW.retweeted;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER tweets_AFTER_DELETE AFTER DELETE ON `tweets`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`users` SET num_tweets = num_tweets - 1 WHERE handle = OLD.handle;
+END
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE DEFINER = 'root'@'localhost' TRIGGER tweets_AFTER_INSERT AFTER INSERT ON `tweets`
+FOR EACH ROW
+BEGIN
+UPDATE `csi_300_project_3_development`.`users` SET num_tweets = num_tweets + 1 WHERE handle = NEW.handle;
+END
+  SQL
+
 end
