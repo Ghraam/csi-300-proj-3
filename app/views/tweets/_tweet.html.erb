@@ -1,7 +1,7 @@
 <div id="<%= dom_id tweet %>">
   <p>
     <strong>Handle:</strong>
-    @<%= tweet.handle %>
+    <%= link_to "@" + tweet.handle, User.find(tweet.handle) %>
   </p>
 
   <p>
@@ -23,4 +23,6 @@
     <strong>Created at:</strong>
     <%= tweet.created_at %>
   </p>
+
+  <%= link_to "Like this tweet", "/likes/new?tweet_id=#{tweet.tweet_id}" %>
 </div>

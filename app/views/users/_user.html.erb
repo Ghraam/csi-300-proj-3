@@ -1,7 +1,7 @@
 <div id="<%= dom_id user %>">
   <p>
     <strong>Handle:</strong>
-    @<%= user.handle %>
+    <%= link_to "@" + user.handle, user %>
   </p>
 
   <p>
@@ -33,5 +33,7 @@
     <strong>Num tweets:</strong>
     <%= user.num_tweets %>
   </p>
+
+  <%= link_to "Follow this user", "/follows/new?followee=" + CGI.escape(user.handle) %>
 
 </div>

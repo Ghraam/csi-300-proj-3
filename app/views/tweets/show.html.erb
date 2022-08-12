@@ -8,3 +8,8 @@
 
   <%= button_to "Destroy this tweet", @tweet, method: :delete %>
 </div>
+
+<h2>Likes</h2>
+<% @tweet.likes.map { |like| User.find(like.handle) }.each do |liker| %>
+  <%= render liker %><br/>
+<% end %>

@@ -8,3 +8,18 @@
 
   <%= button_to "Destroy this user", @user, method: :delete %>
 </div>
+
+<h2>Following</h2>
+<% Follow.where("follower = ?", @user.handle).map { |rel| User.find(rel.followee) }.each do |followee| %>
+  <%= render followee %><br/>
+<% end %>
+
+<h2>Followers</h2>
+<% Follow.where("followee = ?", @user.handle).map { |rel| User.find(rel.follower) }.each do |follower| %>
+  <%= render follower %><br/>
+<% end %>
+
+<h2>Tweets</h2>
+<% Tweet.where("handle = ?", @user.handle).each do |tweet| %>
+  <%= render tweet %><br/>
+<% end %>

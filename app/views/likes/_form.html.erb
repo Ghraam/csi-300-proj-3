@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :handle, style: "display: block" %>
-    <%= form.text_field :handle %>
+    <%= form.text_field :handle, value: params["handle"] %>
   </div>
 
   <div>
     <%= form.label :tweet_id, style: "display: block" %>
-    <%= form.text_field :tweet_id %>
+    <%= form.text_field :tweet_id, value: params["tweet_id"] %>
   </div>
 
   <div>

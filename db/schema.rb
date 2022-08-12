@@ -131,5 +131,4 @@ BEGIN
 UPDATE `csi_300_project_3_development`.`users` SET num_tweets = num_tweets + 1 WHERE handle = NEW.handle;
 END
   SQL
-
 end

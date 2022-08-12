@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :follower, style: "display: block" %>
-    <%= form.text_field :follower %>
+    <%= form.text_field :follower, value: params["follower"] %>
   </div>
 
   <div>
     <%= form.label :followee, style: "display: block" %>
-    <%= form.text_field :followee %>
+    <%= form.text_field :followee, value: params["followee"] %>
   </div>
 
   <div>
