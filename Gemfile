@@ -74,3 +74,4 @@ end
 gem "schema_to_scaffold"
 gem "rufo"
 gem "hairtrigger"
+gem "faker"
