@@ -24,5 +24,6 @@
     <%= tweet.created_at %>
   </p>
 
-  <%= link_to "Like this tweet", "/likes/new?tweet_id=#{tweet.tweet_id}" %>
+  <%= link_to "Like this tweet", "/likes/new?tweet_id=#{tweet.tweet_id}" %><br/>
+  <%= link_to "Retweet this tweet", "/retweets/new?retweeted=#{tweet.tweet_id}" %>
 </div>

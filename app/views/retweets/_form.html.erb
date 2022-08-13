@@ -13,12 +13,12 @@
 
   <div>
     <%= form.label :quote_tweet, style: "display: block" %>
-    <%= form.number_field :quote_tweet %>
+    <%= form.number_field :quote_tweet, value: params["quote_tweet"] %>
   </div>
 
   <div>
     <%= form.label :retweeted, style: "display: block" %>
-    <%= form.number_field :retweeted %>
+    <%= form.number_field :retweeted, value: params["retweeted"] %>
   </div>
 
   <div>
